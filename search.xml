@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>QT5设置文件保存格式为UTF-8</title>
+    <url>/2019/04/04/T5%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98%E6%A0%BC%E5%BC%8F%E4%B8%BAUTF-8/</url>
+    <content><![CDATA[<p>设置文件流的格式为UTF-8即可，解决读出文件中文显示乱码问题</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">QTextStream <span class="title">ts</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line">ts.setCodec(<span class="string">"UTF-8"</span>);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>qt</category>
+      </categories>
+      <tags>
+        <tag>乱码</tag>
+        <tag>qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Openssl-windows编译说明</title>
+    <url>/2019/04/30/Openssl%E5%AE%98%E6%96%B9%E7%BC%96%E8%AF%91%E8%AF%B4%E6%98%8E/</url>
+    <content><![CDATA[<p>on Windows (only pick one of the targets for configuration):</p>
+<pre><code>  $ perl Configure { VC-WIN32 | VC-WIN64A | VC-WIN64I | VC-CE }
+  $ nmake
+  $ nmake test
+  $ nmake install
+</code></pre>
+<p>在新的vc编译环境下，ms不提供支持了，所以用nmake工具，perl后添加no-shared为编译静态库，默认编译动态库</p>
+]]></content>
+      <categories>
+        <category>openssl</category>
+      </categories>
+      <tags>
+        <tag>openssl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QT5信号槽连接方式</title>
+    <url>/2019/04/13/QT5%E4%BF%A1%E5%8F%B7%E6%A7%BD%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<pre><code>旧的写法：
+connect(this-&gt;m,SIGNAL(baseonButtonGlobalClickedSignal()),this,SLOT(onButtonGlobalClicked()));
+</code></pre>
+<p></p>
+<pre><code>新的写法:
+connect(this-&gt;helpcontent,&amp;QLabelClicked::QLabelClickedSignal,this,&amp;MainWindow::onOpenUrl);
+
+
+注意：不能混用，SIGNAL和SLOT搭配，信号和槽要适配，不能信号用旧的写法， 槽用新的写法。</code></pre>
+]]></content>
+      <categories>
+        <category>qt5</category>
+      </categories>
+      <tags>
+        <tag>qt5</tag>
+        <tag>信号和槽</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TTS软件帮助说明</title>
+    <url>/2019/04/05/TTS%E8%BD%AF%E4%BB%B6%E5%B8%AE%E5%8A%A9%E8%AF%B4%E6%98%8E/</url>
+    <content><![CDATA[<p>本页面提供TTS系统软件帮助文档。</p>
+<pre><code>本软件是毕业设计成品，提供文本转语音功能，有在线和离线转换功能，并提供功能丰富的全局模式和简洁大方的迷你模式，具体功能见软件菜单栏。
+</code></pre>
+<p></p>
+<pre><code>快捷键说明如下：
+ ctrl+o：打开文件
+ ctrl+shift+c：关闭文件
+ ctrl+shift+e：退出软件
+ ctrl+shift+f：全屏
+ ctrl+shift+g：全局模式（默认）
+ ctrl+shift+m：迷你模式
+ ctrl+shift+h：帮助
+ ctrl+shift+a: 关于
+ space：播放/暂停
+ ctrl+left：播放上一个文件
+ ctrl+right：播放下一个文件
+ ctrl+up：音量增大
+ ctrl+down：音量减小
+ ctrl+shift+z：在线语音引擎
+ ctrl+shfit+l：离线语音引擎</code></pre>
+]]></content>
+      <categories>
+        <category>毕业设计</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+        <tag>TTS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>openssl安装问题</title>
+    <url>/2019/04/08/enssl%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>编译openssl过程中出现错误：</p>
+<pre><code>tmp32dll\sha1-586.asm(1432) : error A2070:invalid instruction operands
+tmp32dll\sha1-586.asm(1576) : error A2070:invalid instruction operands
+</code></pre>
+<p>由于1.0.2版本过新，导致报错，于是下载1.0.1版本，链接如下：</p>
+<pre><code>    https://www.openssl.org/source/openssl-1.0.1r.tar.gz
+</code></pre>
+<p>32位安装流程：</p>
+<pre><code>   1.安装perl
+   2.配置vs开发人工具环境变量
+   3.打开命令窗口到openssl文件夹下
+   4.perl configure VC-WIN32
+   5.ms/do_ms
+   6.nmake -f ms\ntdll.mak 
+   测试成功：
+   7.nmake -f ms\ntdll.mak test
+</code></pre>
+<p>64位安装流程：</p>
+<pre><code>     1.安装perl
+     2.配置vs开发人工具环境变量
+     3.打开命令窗口到openssl文件夹下
+  
+     4.perl Configure debug-VC-WIN64A no-asm --prefix=C:\openssl\lib --	openssldir=C:\openssl\bin 		
+     5.ms\do_win64a
+     6.nmake -f ms\ntdll.mak clean
+     7.nmake -f ms\ntdll.mak 
+     8.nmake -f ms\nt.mak clean
+     9.nmake -f ms\nt.mak</code></pre>
+]]></content>
+      <categories>
+        <category>openssl</category>
+      </categories>
+      <tags>
+        <tag>openssl</tag>
+        <tag>vs2017</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>修复hexo-admin图片无法正确链接问题</title>
+    <url>/2019/04/04/hexo-admin%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%AD%A3%E7%A1%AE%E9%93%BE%E6%8E%A5%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>由于配置hexo的时候安装了hexo-assert-image模块来解决每篇文章的图片插入问题，当我采用Hexo-admin时，就会出现冲突问题，使hexo-admin插入的图片无法正确显示，在网上查了很久，没找到相似原因，于是只好自己来改代码。<br>
+这是由于hexo-assert-image模块链接的文件路径和hexo-admin插件保存的文件路径不一致，hexo-assert-image处理图片时格式为时间/文章名/图片名，而hexo-admin默认保存到source/images目录下，二者目录不一致，以hexo-assert-image的方式来链接图片肯定会找不到图片。</p>
+<p><img src="/2019/04/04/hexo-admin%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%AD%A3%E7%A1%AE%E9%93%BE%E6%8E%A5%E9%97%AE%E9%A2%98/%5Cimages%5Cimage-0.png" alt="upload successful"></p>
+<p>所以，为了简单地解决这个问题，直接在\blog\node_modules\hexo-asset-image模块下修改index.js文件：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    </span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPosition</span>(<span class="params">str, m, i</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.split(m, i).join(m).length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hexo.extend.filter.register(<span class="string">'after_post_render'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> config = hexo.config;</span><br><span class="line">  <span class="keyword">if</span>(config.post_asset_folder)&#123;</span><br><span class="line">    <span class="keyword">var</span> link = data.permalink;</span><br><span class="line">	<span class="keyword">var</span> beginPos = getPosition(link, <span class="string">'/'</span>, <span class="number">3</span>) + <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// In hexo 3.1.1, the permalink of "about" page is like ".../about/index.html".</span></span><br><span class="line">	<span class="keyword">var</span> endPos = link.lastIndexOf(<span class="string">'/'</span>) + <span class="number">1</span>;</span><br><span class="line">    link = link.substring(beginPos, endPos);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> toprocess = [<span class="string">'excerpt'</span>, <span class="string">'more'</span>, <span class="string">'content'</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; toprocess.length; i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> key = toprocess[i];</span><br><span class="line"> </span><br><span class="line">      <span class="keyword">var</span> $ = cheerio.load(data[key], &#123;</span><br><span class="line">        ignoreWhitespace: <span class="literal">false</span>,</span><br><span class="line">        xmlMode: <span class="literal">false</span>,</span><br><span class="line">        lowerCaseTags: <span class="literal">false</span>,</span><br><span class="line">        decodeEntities: <span class="literal">false</span></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      $(<span class="string">'img'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> ($(<span class="keyword">this</span>).attr(<span class="string">'src'</span>))&#123;</span><br><span class="line">			<span class="comment">// For windows style path, we replace '\' to '/'.</span></span><br><span class="line">			<span class="keyword">var</span> src = $(<span class="keyword">this</span>).attr(<span class="string">'src'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>);</span><br><span class="line">			<span class="keyword">if</span>(!<span class="regexp">/http[s]*.*|\/\/.*/</span>.test(src) &amp;&amp;</span><br><span class="line">			   !<span class="regexp">/^\s*\//</span>.test(src)) &#123;</span><br><span class="line">			  <span class="comment">// For "about" page, the first part of "src" can't be removed.</span></span><br><span class="line">			  <span class="comment">// In addition, to support multi-level local directory.</span></span><br><span class="line">			  <span class="keyword">var</span> linkArray = link.split(<span class="string">'/'</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params">elem</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">return</span> elem != <span class="string">''</span>;</span><br><span class="line">			  &#125;);</span><br><span class="line">			  <span class="keyword">var</span> srcArray = src.split(<span class="string">'/'</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params">elem</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">return</span> elem != <span class="string">''</span> &amp;&amp; elem != <span class="string">'.'</span>;</span><br><span class="line">			  &#125;);</span><br><span class="line">			  <span class="keyword">if</span>(srcArray.length &gt; <span class="number">1</span>)</span><br><span class="line">				srcArray.shift();</span><br><span class="line">			  src = srcArray.join(<span class="string">'/'</span>);</span><br><span class="line">			  <span class="keyword">if</span>(src.split(<span class="string">"%5C"</span>)[<span class="number">1</span>]!=<span class="string">"images"</span>)</span><br><span class="line">			  &#123;</span><br><span class="line">			  	 $(<span class="keyword">this</span>).attr(<span class="string">'src'</span>, config.root + link + src);</span><br><span class="line">			  	 <span class="built_in">console</span>.info&amp;&amp;<span class="built_in">console</span>.info(<span class="string">"update link as:--&gt;"</span>+config.root + link + src);</span><br><span class="line">			  &#125;<span class="string">``</span></span><br><span class="line">			  <span class="keyword">else</span></span><br><span class="line">			  &#123;</span><br><span class="line">			  	 $(<span class="keyword">this</span>).attr(<span class="string">'src'</span>, config.root + src.split(<span class="string">"%5C"</span>)[<span class="number">1</span>] + <span class="string">'/'</span>+src.split(<span class="string">"%5C"</span>)[<span class="number">2</span>]);</span><br><span class="line">			  	  <span class="built_in">console</span>.info&amp;&amp;<span class="built_in">console</span>.info(<span class="string">"update link as:--&gt;"</span>+config.root + src.split(<span class="string">"%5C"</span>)[<span class="number">1</span>] + <span class="string">'/'</span>+src.split(<span class="string">"%5C"</span>)[<span class="number">2</span>]);</span><br><span class="line">			  &#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.info&amp;&amp;<span class="built_in">console</span>.info(<span class="string">"no src attr, skipped..."</span>);</span><br><span class="line">			<span class="built_in">console</span>.info&amp;&amp;<span class="built_in">console</span>.info($(<span class="keyword">this</span>));</span><br><span class="line">		&#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      data[key] = $.html();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>hexo-admin</category>
+      </categories>
+      <tags>
+        <tag>hexo-admin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Test hexo admin</title>
+    <url>/2019/04/04/Test-hexo-admin/</url>
+    <content><![CDATA[<p>测试一下hexo admin的图片的上传</p>
+<p><img src="/2019/04/04/Test-hexo-admin/%5Cimages%5Cpasted-2.png" alt="upload successful"></p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kmp算法</title>
+    <url>/2018/11/17/kmp%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Index</span><span class="params">(<span class="built_in">string</span> s,<span class="built_in">string</span> t)</span><span class="comment">//传统模式匹配，由于要回溯,时间复杂度m*n</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;s.length()&amp;&amp;j&lt;t.length())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i]==t[j])</span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            i = i - j + <span class="number">1</span>;</span><br><span class="line">            j = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(j&gt;=t.length()) <span class="keyword">return</span> i-t.length();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> * <span class="title">getNext</span><span class="params">(<span class="built_in">string</span> t,<span class="keyword">int</span> next[])</span><span class="comment">//计算next数组</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">-1</span>,i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;t.length()<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">-1</span> || t[i] == t[k])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (t[i + <span class="number">1</span>] == t[k + <span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                next[++i] = next[++k];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                next[++i] = ++k;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            k = next[k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kmp</span><span class="params">(<span class="built_in">string</span> s,<span class="built_in">string</span> t)</span><span class="comment">//kmp算法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s==<span class="string">""</span> || t==<span class="string">""</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> *next = <span class="keyword">new</span> <span class="keyword">int</span>[s.length()];</span><br><span class="line">    getNext(t,next);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> t_len = t.length();</span><br><span class="line">    <span class="keyword">int</span> s_len = s.length();</span><br><span class="line">    <span class="keyword">while</span>( i &lt; s_len &amp;&amp; j &lt; t_len)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(j==<span class="number">-1</span>||s[i]==t[j])</span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            j = next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(j&gt;=t.length())<span class="keyword">return</span> i-t.length();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> s,t;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;s&gt;&gt;t;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;Index(s,t)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;kmp(s,t)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>字符串</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>字符串匹配</tag>
+        <tag>kmp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pyqt基本</title>
+    <url>/2019/10/20/pyqt%E5%9F%BA%E6%9C%AC/</url>
+    <content><![CDATA[<p><img src="/images/2019/10/20/1379cc00-f33b-11e9-85a3-6d70c3b8e69d.png" alt="image.png"></p>
+]]></content>
+      <categories>
+        <category>qt</category>
+      </categories>
+      <tags>
+        <tag>qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>修复hexo-admin图片无法加载的问题</title>
+    <url>/2019/04/04/hexo-admin%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<pre><code>hexo-admin提供实时预览功能，但是在粘贴图片到markdown编辑器时，一直显示不了图片
+会出现
+</code></pre>
+<p><img src="/2019/04/04/hexo-admin%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/%5Cimages%5Cimage-4.png" alt="upload successful"></p>
+<pre><code>无论怎么刷新都无法显示，是因为粘贴的路径有问题：\\image\\图片.png\，这里我们发现图片后面还有斜杠，image前面有两个斜杠，所以，直接去代码修改相关处。
+</code></pre>
+<p>在hexo-admin\www\bundle.js里面，搜索imageUploads，到第二处，添加代码：  var temp = res.src.split(’\’); res.src = ‘\’ + temp[2] + ‘\’+ temp[3];即可，截图如下：<br>
+   <br>
+<img src="/2019/04/04/hexo-admin%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/%5Cimages%5Cimage-5.png" alt="upload successful"></p>
+<pre><code> 然后就可以实时显示图片了，还有问题的话点一下右上角的检查按钮就行了，返回预览就能看到效果。
+</code></pre>
+<p><img src="/2019/04/04/hexo-admin%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/%5Cimages%5Cimage-3.png" alt="upload successful"></p>
+<p><img src="/2019/04/04/hexo-admin%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/%5Cimages%5Cimage-6.png" alt="upload successful"></p>
+]]></content>
+      <categories>
+        <category>hexo-admin</category>
+      </categories>
+      <tags>
+        <tag>hexo-admin</tag>
+        <tag>修复</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>七大设计原则</title>
+    <url>/2020/07/21/%E4%B8%83%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</url>
+    <content><![CDATA[<p><strong>设计的七大原则分别是：<br>
+单一职责原则，接口隔离原则，依赖倒转原则，里氏原则，开闭原则，合成复用原则，迪米特法则</strong><br>
+<strong>&gt; 设计原则的目的是使程序或者框架达到低耦合高内聚、便于扩展的目的。</strong><br>
+<strong>1.   开闭原则(Open-Closed Principle, OCP)</strong></p>
+<p>定义：软件实体应当对扩展开放，对修改关闭。这句话说得有点专业，更通俗一点讲，也就是：软件系统中包含的各种组件，例如模块（Modules）、类（Classes）以及功能（Functions）等等，应该在不修改现有代码的基础上，去扩展新功能。开闭原则中原有“开”，是指对于组件功能的扩展是开放的，是允许对其进行功能扩展的；开闭原则中“闭”，是指对于代码的修改是封闭的，即不应该修改原有的代码。</p>
+<p>问题由来：凡事的产生都有缘由。我们来看看，开闭原则的产生缘由。在软件的生命周期内，因为变化、升级和维护等原因需要对软件原有代码进行修改时，可能会给旧代码中引入错误，也可能会使我们不得不对整个功能进行重构，并且需要原有代码经过重新测试。这就对我们的整个系统的影响特别大，这也充分展现出了系统的耦合性如果太高，会大大的增加后期的扩展，维护。为了解决这个问题，故人们总结出了开闭原则。解决开闭原则的根本其实还是在解耦合。所以，我们面向对象的开发，我们最根本的任务就是解耦合。</p>
+<p>解决方法：当软件需要变化时，尽量通过扩展软件实体的行为来实现变化，而不是通过修改已有的代码来实现变化。</p>
+<p>小结：开闭原则具有理想主义的色彩，说的很抽象，它是面向对象设计的终极目标。其他几条原则，则可以看做是开闭原则的实现。我们要用抽象构建框架，用实现扩展细节。<br>
+<strong>2.    单一职责原则（Single Responsibility Principle）</strong></p>
+<p>定义：一个类，只有一个引起它变化的原因。即：应该只有一个职责。</p>
+<p>每一个职责都是变化的一个轴线，如果一个类有一个以上的职责，这些职责就耦合在了一起。这会导致脆弱的设计。当一个职责发生变化时，可能会影响其它的职责。另外，多个职责耦合在一起，会影响复用性。例如：要实现逻辑和界面的分离。需要说明的一点是单一职责原则不只是面向对象编程思想所特有的，只要是模块化的程序设计，都需要遵循这一重要原则。</p>
+<p>问题由来：类T负责两个不同的职责：职责P1，职责P2。当由于职责P1需求发生改变而需要修改类T时，有可能会导致原本运行正常的职责P2功能发生故障。</p>
+<p>解决方法：分别建立两个类T1、T2，使T1完成职责P1功能，T2完成职责P2功能。这样，当修改类T1时，不会使职责P2发生故障风险；同理，当修改T2时，也不会使职责P1发生故障风险。</p>
+<p>**3.    里氏替换原则（Liskov Substitution Principle） **</p>
+<p>定义：子类型必须能够替换掉它们的父类型。注意这里的能够两字。有人也戏称老鼠的儿子会打洞原则。</p>
+<p>问题由来：有一功能P1，由类A完成。现需要将功能P1进行扩展，扩展后的功能为P，其中P由原有功能P1与新功能P2组成。新功能P由类A的子类B来完成，则子类B在完成新功能P2的同时，有可能会导致原有功能P1发生故障。</p>
+<p>解决方法：类B继承类A时，除添加新的方法完成新增功能P2外，尽量不要重写父类A的方法，也尽量不要重载父类A的方法</p>
+<p>小结：所有引用父类的地方必须能透明地使用其子类的对象。子类可以扩展父类的功能，但不能改变父类原有的功能，即：子类可以实现父类的抽象方法，子类也中可以增加自己特有的方法，但不能覆盖父类的非抽象方法。当子类的方法重载父类的方法时，方法的前置条件（即方法的形参）要比父类方法的输入参数更宽松。当子类的方法实现父类的抽象方法时，方法的后置条件（即方法的返回值）要比父类更严格。<br>
+<strong>4.    迪米特法则（最小知道原则）（Law Of Demeter）</strong></p>
+<p>定义：迪米特法则又叫最少知道原则，即：一个对象应该对其他对象保持最少的了解。如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。简单定义为只与直接的朋友通信。首先来解释一下什么是直接的朋友：每个对象都会与其他对象有耦合关系，只要两个对象之间有耦合关系，我们就说这两个对象之间是朋友关系。耦合的方式很多，依赖、关联、组合、聚合等。其中，我们称出现成员变量、方法参数、方法返回值中的类为直接的朋友，而出现在局部变量中的类则不是直接的朋友。也就是说，陌生的类最好不要作为局部变量的形式出现在类的内部。</p>
+<p>问题由来：类与类之间的关系越密切，耦合度越大，当一个类发生改变时，对另一个类的影响也越大。</p>
+<p>最早是在1987年由美国Northeastern University的Ian Holland提出。通俗的来讲，就是一个类对自己依赖的类知道的越少越好。也就是说，对于被依赖的类来说，无论逻辑多么复杂，都尽量地的将逻辑封装在类的内部，对外除了提供的public方法，不对外泄漏任何信息。迪米特法则还有一个更简单的定义：只与直接的朋友通信。</p>
+<p>解决方法：尽量降低类与类之间的耦合。 自从我们接触编程开始，就知道了软件编程的总的原则：低耦合，高内聚。无论是面向过程编程还是面向对象编程，只有使各个模块之间的耦合尽量的低，才能提高代码的复用率。</p>
+<p>迪米特法则的初衷是降低类之间的耦合，由于每个类都减少了不必要的依赖，因此的确可以降低耦合关系。但是凡事都有度，虽然可以避免与非直接的类通信，但是要通信，必然会通过一个“中介”来发生联系。故过分的使用迪米特原则，会产生大量这样的中介和传递类，导致系统复杂度变大。所以在采用迪米特法则时要反复权衡，既做到结构清晰，又要高内聚低耦合。</p>
+<p><strong>5.    依赖倒置原则（Dependence Inversion Principle）</strong></p>
+<p>定义：高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。中心思想是面向接口编程</p>
+<p>问题由来：类A直接依赖类B，假如要将类A改为依赖类C，则必须通过修改类A的代码来达成。这种场景下，类A一般是高层模块，负责复杂的业务逻辑；类B和类C是低层模块，负责基本的原子操作；假如修改类A，会给程序带来不必要的风险。</p>
+<p>解决方法：将类A修改为依赖接口I，类B和类C各自实现接口I，类A通过接口I间接与类B或者类C发生联系，则会大大降低修改类A的几率。</p>
+<p>在实际编程中，我们一般需要做到如下3点：</p>
+<p>1）. 低层模块尽量都要有抽象类或接口，或者两者都有。</p>
+<p>2）. 变量的声明类型尽量是抽象类或接口。</p>
+<p>3）. 使用继承时遵循里氏替换原则。</p>
+<p>采用依赖倒置原则尤其给多人合作开发带来了极大的便利，参与协作开发的人越多、项目越庞大，采用依赖导致原则的意义就越重大。</p>
+<p>小结：依赖倒置原则就是要我们面向接口编程，理解了面向接口编程，也就理解了依赖倒置。<br>
+<strong>6.    接口隔离原则（Interface Segregation Principle）</strong></p>
+<p>定义：客户端不应该依赖它不需要的接口；一个类对另一个类的依赖应该建立在最小的接口上。</p>
+<p>问题由来：类A通过接口I依赖类B，类C通过接口I依赖类D，如果接口I对于类A和类B来说不是最小接口，则类B和类D必须去实现他们不需要的方法</p>
+<p>解决方法：1、 使用委托分离接口。2、 使用多重继承分离接口。3.将臃肿的接口I拆分为独立的几个接口，类A和类C分别与他们需要的接口建立依赖关系。也就是采用接口隔离原则</p>
+<p>小结：我们在代码编写过程中，运用接口隔离原则，一定要适度，接口设计的过大或过小都不好。对接口进行细化可以提高程序设计灵活性是不挣的事实，但是如果过小，则会造成接口数量过多，使设计复杂化。所以一定要适度。设计接口的时候，只有多花些时间去思考和筹划，就能准确地实践这一原则。</p>
+<p><strong>7.   合成/聚合原则（合成复用原则）(Composite/Aggregate Reuse Principle,CARP)</strong></p>
+<p>定义：也有人叫做合成复用原则，及尽量使用合成/聚合，尽量不要使用类继承。换句话说，就是能用合成/聚合的地方，绝不用继承。</p>
+<p>为什么要尽量使用合成/聚合而不使用类继承？</p>
+<ol>
+<li>
+<p>对象的继承关系在编译时就定义好了，所以无法在运行时改变从父类继承的子类的实现</p>
+</li>
+<li>
+<p>子类的实现和它的父类有非常紧密的依赖关系，以至于父类实现中的任何变化必然会导致子类发生变化</p>
+</li>
+<li>
+<p>当你复用子类的时候，如果继承下来的实现不适合解决新的问题，则父类必须重写或者被其它更适合的类所替换，这种依赖关系限制了灵活性，并最终限制了复用性。</p>
+</li>
+</ol>
+<p>总结：这些原则在设计模式中体现的淋淋尽致，设计模式就是实现了这些原则，从而达到了代码复用、增强了系统的扩展性。所以设计模式被很多人奉为经典。我们可以通过好好的研究设计模式，来慢慢的体会这些设计原则</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>设计原则</category>
+      </categories>
+      <tags>
+        <tag>设计原则</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树创建及遍历方法</title>
+    <url>/2018/09/28/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%88%9B%E5%BB%BA%E5%8F%8A%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>二叉树的遍历方法代码</p>
+<a id="more"></a>
+<p>代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by hj-liao on 18-9-12.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Bitree</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Bitree</span> *<span class="title">lchild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Bitree</span> *<span class="title">rchild</span>;</span></span><br><span class="line">&#125;BitNode,*Bit;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> s=<span class="string">"ABD##E#F##C##"</span>;</span><br><span class="line"><span class="function">Bit <span class="title">createBitree</span><span class="params">(<span class="keyword">int</span> &amp;pos)</span><span class="comment">//前序生成二叉树</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pos++;</span><br><span class="line">    BitNode *p;</span><br><span class="line">    <span class="keyword">if</span>(pos&gt;=s.size())</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[pos]==<span class="string">'#'</span>)</span><br><span class="line">            p = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            p = <span class="keyword">new</span> BitNode;</span><br><span class="line">            p-&gt;data=s[pos];</span><br><span class="line">            p-&gt;lchild=createBitree(pos);</span><br><span class="line">            p-&gt;rchild=createBitree(pos);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Bit <span class="title">create</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> createBitree(pos);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrder</span><span class="params">(Bit b)</span><span class="comment">//前序遍历</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;b-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        PreOrder(b-&gt;lchild);</span><br><span class="line">        PreOrder(b-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrder</span><span class="params">(Bit b)</span><span class="comment">//中序遍历</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        InOrder(b-&gt;lchild);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;b-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        InOrder(b-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostOrder</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        PostOrder(b-&gt;lchild);</span><br><span class="line">        PostOrder(b-&gt;rchild);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;b-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LevelOrder</span><span class="params">(Bit b)</span><span class="comment">//借助队列层次遍历二叉树</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;Bit&gt; q;</span><br><span class="line">    Bit p;</span><br><span class="line">    q.push(b);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        p = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;lchild!=<span class="literal">NULL</span>)</span><br><span class="line">            q.push(p-&gt;lchild);</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;rchild!=<span class="literal">NULL</span>)</span><br><span class="line">            q.push(p-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *遍历方法的非递归实现，借助栈</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//先序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder_ite</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Bit&gt; s;</span><br><span class="line">    Bit p;</span><br><span class="line">    s.push(b);</span><br><span class="line">    <span class="keyword">while</span>(!s.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        p = s.top();</span><br><span class="line">        s.pop();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;rchild!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            s.push(p-&gt;rchild);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;lchild!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            s.push(p-&gt;lchild);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非递归中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrder_ite</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Bit&gt; s;</span><br><span class="line">    Bit p=b;</span><br><span class="line">    <span class="keyword">while</span>(p||!s.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p)</span><br><span class="line">        &#123;</span><br><span class="line">            s.push(p);</span><br><span class="line">            p = p-&gt;lchild;</span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            p = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">            p = p-&gt;rchild;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非递归后序遍历,使用前一次访问结点判别</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostOrder_ite</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Bit&gt; s;</span><br><span class="line">    Bit p,pre=<span class="literal">NULL</span>;</span><br><span class="line">    s.push(b);</span><br><span class="line">    <span class="keyword">while</span>(!s.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        p = s.top();</span><br><span class="line">        <span class="keyword">if</span>((p-&gt;lchild==<span class="literal">NULL</span> &amp;&amp; p-&gt;rchild==<span class="literal">NULL</span>) ||((pre!=<span class="literal">NULL</span>)&amp;&amp;(pre==p-&gt;lchild)||pre==p-&gt;rchild))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">            s.pop();</span><br><span class="line">            pre = p;</span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;rchild!=<span class="literal">NULL</span>)</span><br><span class="line">                s.push(p-&gt;rchild);</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;lchild!=<span class="literal">NULL</span>)</span><br><span class="line">                s.push(p-&gt;lchild);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bit b = create();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"前序遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    PreOrder(b);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"中序遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    InOrder(b);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"后序遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    PostOrder(b);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"层次遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    LevelOrder(b);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"非递归前序遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    preOrder_ite(b);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"非递归中序遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    InOrder_ite(b);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"非递归后序遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    PostOrder_ite(b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>二叉树</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>今天，毕业了</title>
+    <url>/2019/06/25/%E4%BB%8A%E5%A4%A9%EF%BC%8C%E6%88%91%E6%AF%95%E4%B8%9A%E4%BA%86/</url>
+    <content><![CDATA[<p>今天，我从待了四年的母校——西南交通大学毕业了，逝去的时光终究是珍贵的，因为它属于过去，不可获得。<br>
+早上从天佑斋三栋离开，室友还睡眼惺忪地望了我一眼，交代了一些事情，便离开了。我知道，此生再不会踏入036018，和室友深夜聊天。<br>
+东西都邮寄回去了，不想带着太多东西离开，因为负重的感觉会更让人心情沉重，丢在校园的太多东西已经无法带走，只能留在回忆里。<br>
+四年转瞬，当我选择了工作而脱离了学生这个身份，我才感觉到在校园的生活是有多么美好，无论是在混日子还是勤奋地学习，都是一样的。<br>
+因为这段时光属于自己，谁也夺不走。<br>
+大学四年，仍是孤身一人，获得一些东西时就会失去一些东西，很正常，没有什么好抱怨的，倒是希望之后的日子能够幸逢有缘人。<br>
+很高兴大学学的专业还算是自己比较喜欢的，未来发展也不错，感谢当初学校的调剂。<br>
+在学校里，最珍贵的是遇到了很多不同的朋友，能够和他们一起学习、生活很是幸运。<br>
+感谢四年来的室友们，虽然大家性格各异，兴趣也有所不同，当仍然能够求同存异，一起度过这段时光，希望各自相安，有缘再见！<br>
+再见了，我的学生时代。<br>
+再见了，我的西南交大。<br>
+江湖再见</p>
+<p></p>
+]]></content>
+      <categories>
+        <category>光阴记录</category>
+      </categories>
+      <tags>
+        <tag>毕业</tag>
+        <tag>似水年华</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>哈希查找</title>
+    <url>/2018/11/16/%E5%93%88%E5%B8%8C%E6%9F%A5%E6%89%BE/</url>
+    <content><![CDATA[<p>对关键字数组进行哈希，哈希函数为除留余数法，解决冲突为线性探测法</p>
+<a id="more"></a>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HTL 100</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">length</span>( <span class="title">T</span> &amp;<span class="title">arr</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">sizeof</span>(arr)/ <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> hashTable[HTL]=&#123;<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> key[<span class="number">9</span>]=&#123;<span class="number">1</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">13</span>,<span class="number">23</span>,<span class="number">34</span>,<span class="number">42</span>,<span class="number">50</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isprime</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;<span class="built_in">sqrt</span>(num);i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(num%i==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxprime</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=HTL<span class="number">-1</span>;i&gt;=<span class="number">2</span>;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(isprime(i))</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">fullT</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;maxprime();i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(hashTable[i]==<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashFun</span><span class="params">(<span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(key&lt;=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> address = key%maxprime();</span><br><span class="line">    <span class="keyword">return</span> address;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve_conflict</span><span class="params">(<span class="keyword">int</span> address,<span class="keyword">int</span> increment=<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(fullT())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    address = hashFun(address+increment);</span><br><span class="line">    <span class="keyword">if</span>(hashTable[address]==<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> address;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> solve_conflict(address,increment);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">inithashTable</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> increment = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> address=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; length(key);i++)</span><br><span class="line">    &#123;</span><br><span class="line">        address = hashFun(key[i]);</span><br><span class="line">        <span class="keyword">if</span>(hashTable[address] == <span class="number">-1</span>)</span><br><span class="line">            hashTable[address] = key[i];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            address = solve_conflict(address,increment);</span><br><span class="line">            <span class="keyword">if</span>(fullT())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"表已满，关键字:"</span>&lt;&lt;key[i]&lt;&lt;<span class="string">"无法存入"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            hashTable[address] = key[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_key</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length(key);i++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;key[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_hashT</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length(hashTable);i++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;hashTable[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">add_hashE</span><span class="params">(<span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(key&lt;=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">int</span> increment = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> address=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    address = hashFun(key);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(hashTable[address] == <span class="number">-1</span>)</span><br><span class="line">        hashTable[address] = key;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">        address = solve_conflict(address, increment);</span><br><span class="line">            <span class="keyword">if</span>(fullT())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"表已满，关键字:"</span>&lt;&lt;key&lt;&lt;<span class="string">"无法存入"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        hashTable[address] = key;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(hashTable,<span class="number">-1</span>, <span class="keyword">sizeof</span>(hashTable));</span><br><span class="line">    print_key();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"hash前："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    print_hashT();</span><br><span class="line">    inithashTable();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"hash后:"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    print_hashT();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">10</span>;i&lt;<span class="number">120</span>;i++)</span><br><span class="line">        add_hashE(i);</span><br><span class="line">    print_hashT();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>查找</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树线索化及遍历（不带头结点）</title>
+    <url>/2018/09/30/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BA%BF%E7%B4%A2%E5%8C%96%E5%8F%8A%E9%81%8D%E5%8E%86(%E4%B8%8D%E5%B8%A6%E5%A4%B4%E7%BB%93%E7%82%B9)/</url>
+    <content><![CDATA[<p>二叉树线索化及遍历代码</p>
+<a id="more"></a>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Bitree</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Bitree</span> *<span class="title">lchild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Bitree</span> *<span class="title">rchild</span>;</span></span><br><span class="line">    <span class="keyword">int</span> ltag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> rtag = <span class="number">0</span>;</span><br><span class="line">&#125;BitNode,*Bit;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> s=<span class="string">"ABD##E##CF##G##"</span>;<span class="comment">//"ABD##E#F##C##";</span></span><br><span class="line"><span class="function">Bit <span class="title">createBitree</span><span class="params">(<span class="keyword">int</span> &amp;pos)</span><span class="comment">//前序生成二叉树</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pos++;</span><br><span class="line">    BitNode *p;</span><br><span class="line">    <span class="keyword">if</span>(pos&gt;=s.size())</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[pos]==<span class="string">'#'</span>)</span><br><span class="line">            p = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            p = <span class="keyword">new</span> BitNode;</span><br><span class="line">            p-&gt;data=s[pos];</span><br><span class="line">            p-&gt;lchild=createBitree(pos);</span><br><span class="line">            p-&gt;rchild=createBitree(pos);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Bit <span class="title">create</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> createBitree(pos);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrder</span><span class="params">(Bit b)</span><span class="comment">//前序遍历</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;b-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        PreOrder(b-&gt;lchild);</span><br><span class="line">        PreOrder(b-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrder</span><span class="params">(Bit b)</span><span class="comment">//中序遍历</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        InOrder(b-&gt;lchild);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;b-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        InOrder(b-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostOrder</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        PostOrder(b-&gt;lchild);</span><br><span class="line">        PostOrder(b-&gt;rchild);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;b-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LevelOrder</span><span class="params">(Bit b)</span><span class="comment">//借助队列层次遍历二叉树</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;Bit&gt; q;</span><br><span class="line">    Bit p;</span><br><span class="line">    q.push(b);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        p = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;lchild!=<span class="literal">NULL</span>)</span><br><span class="line">            q.push(p-&gt;lchild);</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;rchild!=<span class="literal">NULL</span>)</span><br><span class="line">            q.push(p-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *遍历方法的非递归实现，借助栈</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//先序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder_ite</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Bit&gt; s;</span><br><span class="line">    Bit p;</span><br><span class="line">    s.push(b);</span><br><span class="line">    <span class="keyword">while</span>(!s.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        p = s.top();</span><br><span class="line">        s.pop();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;rchild!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            s.push(p-&gt;rchild);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;lchild!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            s.push(p-&gt;lchild);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非递归中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrder_ite</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Bit&gt; s;</span><br><span class="line">    Bit p=b;</span><br><span class="line">    <span class="keyword">while</span>(p||!s.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p)</span><br><span class="line">        &#123;</span><br><span class="line">            s.push(p);</span><br><span class="line">            p = p-&gt;lchild;</span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            p = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">            p = p-&gt;rchild;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//非递归后序遍历,使用前一次访问结点判别</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostOrder_ite</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">stack</span>&lt;Bit&gt; s;</span><br><span class="line">    Bit p,pre=<span class="literal">NULL</span>;</span><br><span class="line">    s.push(b);</span><br><span class="line">    <span class="keyword">while</span>(!s.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        p = s.top();</span><br><span class="line">        <span class="keyword">if</span>((p-&gt;lchild==<span class="literal">NULL</span> &amp;&amp; p-&gt;rchild==<span class="literal">NULL</span>) ||((pre!=<span class="literal">NULL</span>)&amp;&amp;(pre==p-&gt;lchild)||pre==p-&gt;rchild))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">            s.pop();</span><br><span class="line">            pre = p;</span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;rchild!=<span class="literal">NULL</span>)</span><br><span class="line">                s.push(p-&gt;rchild);</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;lchild!=<span class="literal">NULL</span>)</span><br><span class="line">                s.push(p-&gt;lchild);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//中序递归遍历生成线索二叉树</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InThreadBt</span><span class="params">(Bit &amp;p,Bit &amp;pre)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        InThreadBt(p-&gt;lchild,pre);</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;lchild==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p-&gt;lchild = pre;</span><br><span class="line">            p-&gt;ltag = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pre!=<span class="literal">NULL</span> &amp;&amp; pre-&gt;rchild==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            pre-&gt;rchild=p;</span><br><span class="line">            pre-&gt;rtag=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        pre = p;</span><br><span class="line">        InThreadBt(p-&gt;rchild,pre);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InCreateThreadBt</span><span class="params">(Bit b)</span><span class="comment">//主算法过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bit pre = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(b!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        InThreadBt(b,pre);</span><br><span class="line">        pre-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">        pre-&gt;rtag = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//中序线索二叉树的遍历</span></span><br><span class="line"><span class="comment">//得到中序第一个结点之后就可以直接依次访问了，非递归实现</span></span><br><span class="line"><span class="function">Bit <span class="title">FirstNode</span><span class="params">(Bit p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(p-&gt;ltag==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;lchild;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//后继结点</span></span><br><span class="line"><span class="function">Bit <span class="title">NextNode</span><span class="params">(Bit p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p-&gt;rtag==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> FirstNode(p-&gt;rchild);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> p-&gt;rchild;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InThreadOrder_ite</span><span class="params">(Bit b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bit p = FirstNode(b);</span><br><span class="line">    <span class="keyword">for</span>(;p!=<span class="literal">NULL</span>;p=NextNode(p))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;p-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bit b = create();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"前序遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    PreOrder(b);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"中序遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    InOrder(b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n生成线索二叉树..."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    InCreateThreadBt(b);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n中序线索二叉数遍历："</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    InThreadOrder(b);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>二叉树</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>排序算法</title>
+    <url>/2018/11/17/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>排序分为内部排序和外部排序。内部排序要求所有待排序数据都在内存中进行交换，外部排序则在排序过程中根据要求不断在内、外存之间移动的排序。</p>
+<p>内部排序：</p>
+<ul>
+<li>插入排序</li>
+<li>交换排序</li>
+<li>选择排序</li>
+<li>归并排序</li>
+</ul>
+<p>外部排序：</p>
+<ul>
+<li>多路归并排序</li>
+</ul>
+<p>各种排序算法的性质（内部）：<br>
+<img src="/2018/11/17/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/sort.png" alt="内部排序算法性质"></p>
+<a id="more"></a>
+<p>以下是内部排序算法代码：</p>
+<p>一. 插入排序</p>
+<ol>
+<li>直接插入排序<br>
+将数组的第一个元素设置为哨兵，便于进行的比较和数据移动，从开始到结束，比较的数据复制到哨兵，将该数据前的数据依次后移一位，直到出现<br>
+比该数据小的元素停止，填充数据到该元素的后一位，迭代完成整个排序。空间复杂度O(1),最好情况下，时间复杂度O(n),最坏情况下，时间复杂度O(n<sup>2),平均情况为O(n</sup>2),为稳定算法</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span><span class="comment">//n为排序数据的数量，数组从1开始i</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        data[<span class="number">0</span>] = data[i];<span class="comment">//哨兵</span></span><br><span class="line">        <span class="keyword">for</span>(j = i<span class="number">-1</span>;data[<span class="number">0</span>] &lt; data[j];--j)</span><br><span class="line">            data[j+<span class="number">1</span>] = data[j];</span><br><span class="line">        data[j+<span class="number">1</span>] = data[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>折半插入排序<br>
+直接插入排序边比较边移动数据，改进直接插入排序，将比较数据和移动数据分离开，先找到带插入的位置再统一地移动待插入位置之后的元素。通过折半查找的方式，减少数据比较的次数<br>
+约为O(nlgn),比较次数和待排数据的初始状态无关，取决于数据多少，而数据移动次数没变。时间复杂度同直接插入排序一样。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HalfInsertSort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span><span class="comment">//数组从1开始</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,low,mid,high;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        data[<span class="number">0</span>] = data[i];<span class="comment">//复制到0位，哨兵</span></span><br><span class="line">        low = <span class="number">1</span>;</span><br><span class="line">        high = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(low&lt;=high)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (low + high)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(data[mid]&gt;data[<span class="number">0</span>])high=mid<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(j=i<span class="number">-1</span>;j&gt;=high+<span class="number">1</span>;--j)</span><br><span class="line">            data[j+<span class="number">1</span>] = data[j];</span><br><span class="line">        data[high+<span class="number">1</span>] = data[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>希尔排序<br>
+直接插入排序和折半插入排序适用于基本有序和数据量不大的数据，而希尔排序则是针对这两点限制的改进。希尔排序实质是将待排表分割成小的分组，对每个分组进行直接插入排序，使整个表“基本有序”，然后对全体进行一次直接插入排序。<br>
+空间复杂度O(n)。由于希尔排序依赖于增量序列的函数，时间复杂度分析比较困难。 当n在某个特定的范围，时间复杂度为O(n<sup>1.3)到O(n</sup>2),平均情况可视为O(n^1.5),<br>
+最坏情况下的时间复杂度为O(n^2)<br>
+希尔排序仅适用于线性表为顺序存储的情况。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellSort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> dk = n/<span class="number">2</span>;dk&gt;=<span class="number">1</span>;dk/=<span class="number">2</span>)<span class="comment">//dk为增量，将数组逐渐划分为小的组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=dk+<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(data[i]&lt;data[i-dk])</span><br><span class="line">            &#123;</span><br><span class="line">                data[<span class="number">0</span>] = data[i];</span><br><span class="line">                <span class="keyword">for</span>(j = i-dk;j&gt;<span class="number">0</span>&amp;&amp;data[<span class="number">0</span>]&lt; data[j];j-=dk)</span><br><span class="line">                    data[j+dk] = data[j];</span><br><span class="line">                data[j+dk] = data[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二. 交换排序</p>
+<ol>
+<li>
+<p>冒泡排序<br>
+冒泡排序是最简单的排序，空间复杂度O(1)，时间复杂度最好O(n),最坏时间复杂度为      O(n<sup>2),平均时间复杂度O(n</sup>2),是稳定的排序算法。</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=n;j&gt;i;j--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(data[i]&gt;data[j])</span><br><span class="line">            &#123;</span><br><span class="line">                temp = data[i];</span><br><span class="line">                data[i] = data[j];</span><br><span class="line">                data[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>快速排序<br>
+快速排序是极其重要的排序算法，是对冒泡算法的改进，其思想是基于分治思想的。<br>
+空间效率，最好情况为O(lg(n+1))向上取整，最坏情况为O(n),平均情况为O(lgn)<br>
+时间效率，平均情况为O(nlgn),最坏情况为O(n^2)<br>
+快速排序是所有内部排序算法中平均性能最好的算法，但是是不稳定的。</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span><span class="comment">//划分</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot = data[low];</span><br><span class="line">    <span class="keyword">while</span>(low &lt; high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(low &lt; high &amp;&amp; data[high] &gt;= pivot) high--;</span><br><span class="line">        data[low] = data[high];</span><br><span class="line">        <span class="keyword">while</span>(low &lt; high &amp;&amp; data[low] &lt;= pivot) low++;</span><br><span class="line">        data[high] = data[low];</span><br><span class="line">    &#125;</span><br><span class="line">    data[low] = pivot;</span><br><span class="line">    <span class="keyword">return</span> low;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(low &lt; high)&#123;</span><br><span class="line">        <span class="keyword">int</span> pivotpos = Partition(data,low,high);</span><br><span class="line">        QuickSort(data,low,pivotpos<span class="number">-1</span>);<span class="comment">//左边部分</span></span><br><span class="line">        QuickSort(data,pivotpos+<span class="number">1</span>,high);<span class="comment">//右边部分</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>三. 选择排序</p>
+<ol>
+<li>简单选择排序<br>
+简单选择排序直接进行选择，类似于直接插入排序，简单粗暴，但是思想不同，直接插入排序是进行比较将待排表的数据插入到合适位置，选择排序更像是直接把最小的数挨个提出来组成新的数据表。<br>
+空间效率:O(1)<br>
+时间效率:O(n^2)<br>
+简单选择排序是不稳定的排序算法。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SimpleChooseSort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp,min;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n<span class="number">-1</span> ;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        min = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">            <span class="keyword">if</span>(data[min]&gt;data[j])</span><br><span class="line">                min = j;</span><br><span class="line">        <span class="keyword">if</span>(min != i )</span><br><span class="line">        &#123;</span><br><span class="line">            temp = data[min];</span><br><span class="line">            data[min] = data[i];</span><br><span class="line">            data[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>堆排序</li>
+</ol>
+<p>堆排序是一种树形选择排序方法，它将待排表看成是一棵完全二叉树，并利用完全二叉树的双亲结点和孩子结点的关系，选择最大或最小的元素。<br>
+分为大根堆和小根堆：<br>
+大根堆：父结点比子结点大，最大元素在根结点<br>
+小根堆：父结点比子结点小，最小元素在根结点</p>
+<p>空间效率： O(1)<br>
+时间效率：建堆时间O(n),向下调整n-1，在最好、最坏、平均情况下，为O(nlgn)<br>
+堆排序是不稳定的排序算法。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AdjustDown</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> k,<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    data[<span class="number">0</span>] = data[k];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">2</span>*k;i&lt;=len;i*=<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; len &amp;&amp; data[i] &lt; data[i+<span class="number">1</span>])</span><br><span class="line">            i++;</span><br><span class="line">        <span class="keyword">if</span>(data[<span class="number">0</span>]&gt;=data[i]) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            data[k] = data[i];</span><br><span class="line">            k = i;</span><br><span class="line">    &#125;</span><br><span class="line">    data[k] = data[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildMaxHeap</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=len/<span class="number">2</span>;i&gt;<span class="number">0</span>;i--)</span><br><span class="line">        AdjustDown(data,i,len);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BuildMaxHeap(data,len);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=len;i&gt;<span class="number">1</span>;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        temp = data[i];</span><br><span class="line">        data[i] = data[<span class="number">1</span>];</span><br><span class="line">        data[<span class="number">1</span>] = temp;</span><br><span class="line">        AdjustDown(data,<span class="number">1</span>,i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>四. 归并排序</p>
+<p>归并排序不同于上述算法思想，而是将两个或两个以上的有序表组合成新的有序表。两两归并又称为2-路归并排序。</p>
+<p>空间效率：O(n)<br>
+时间效率：O(nlgn)<br>
+归并排序是稳定的排序算法</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *asis = <span class="keyword">new</span> <span class="keyword">int</span>[Max];<span class="comment">//辅助数组</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> low,<span class="keyword">int</span> mid,<span class="keyword">int</span> high)</span><span class="comment">//归并</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,k;</span><br><span class="line">    <span class="keyword">for</span>(k=low;k&lt;=high;k++)</span><br><span class="line">        asis[k] = data[k];</span><br><span class="line">    <span class="keyword">for</span>(i=low,j=mid+<span class="number">1</span>,k=i;i&lt;=mid &amp;&amp; j&lt;=high;k++)</span><br><span class="line">        <span class="keyword">if</span>(asis[i]&lt;=asis[j])</span><br><span class="line">            data[k] = asis[i++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            data[k] = asis[j++];</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid) data[k++]=asis[i++];</span><br><span class="line">    <span class="keyword">while</span> (j&lt;=high) data[k++]=asis[j++];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(low &lt; high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">        MergeSort(data,low,mid);</span><br><span class="line">        MergeSort(data,mid+<span class="number">1</span>,high);</span><br><span class="line">        Merge(data,low,mid,high);<span class="comment">//归并</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>五. 基数排序</p>
+<p>基数排序根据关键字排序，类似于一个数的个十百千位分别排序得到排序结果。基数排序分为最高位优先(MSD)和最低位优先(LSD)。<br>
+空间效率： O( r )(r个队列)<br>
+时间效率： O(d(n+r)),d趟分派和收集，一趟分配需要O(n),一趟收集需要<br>
+O( r ),与序列的初始状态无关。<br>
+基数排序是稳定的排序算法。</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>排序</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>并发起来采用静态变量的坑</title>
+    <url>/2019/12/10/%E5%B9%B6%E5%8F%91%E8%B5%B7%E6%9D%A5%E9%87%87%E7%94%A8%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<p>如果静态变量涉及到修改的话，尽量不要在并发环境使用，极有可能会导致错乱。</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>静态变量</tag>
+        <tag>并发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新的开始</title>
+    <url>/2018/07/31/%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<p>重新回到github，新的开始。<br>
+好好复习，准备考研，加油！</p>
+]]></content>
+      <tags>
+        <tag>一些话</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>更换一个hexo编辑器——hexoclient</title>
+    <url>/2019/08/24/%E6%9B%B4%E6%8D%A2%E4%B8%80%E4%B8%AAhexo%E7%BC%96%E8%BE%91%E5%99%A8%E2%80%94%E2%80%94hexoclient/</url>
+    <content><![CDATA[<p>经过亲测，此软件简洁好用，能够自动导入之前的博客数据，基于electron开发，可跨平台，体积也不算大<br>
+附上码云链接：<a href="https://gitee.com/gaoyoubo/hexo-client" target="_blank" rel="noopener">https://gitee.com/gaoyoubo/hexo-client</a><br>
+<strong>软件下载：<a href="https://github.com/gaoyoubo/hexo-client/releases/download/v1.3.1/HexoClient-Setup-1.3.1.exe" target="_blank" rel="noopener">https://github.com/gaoyoubo/hexo-client/releases/download/v1.3.1/HexoClient-Setup-1.3.1.exe</a></strong><br>
+同时感谢开发者高尤波</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电子科技大学2019年820考纲</title>
+    <url>/2018/12/04/%E7%94%B5%E5%AD%90%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A62019%E5%B9%B4820%E8%80%83%E7%BA%B2/</url>
+    <content><![CDATA[<p>2019年电子科技大学820专业课考纲</p>
+<p>考试科目 820 计算机专业基础 考试形式 笔试（闭卷）<br>
+考试时间 180 分钟 考试总分 150 分<br>
+本科目包括《数据结构》和《计算机操作系统》两门课程，总分 150 分，两门课程各占 75 分</p>
+<a id="more"></a>
+<p>《数据结构》<br>
+一、总体要求<br>
+《数据结构》是计算机程序设计的重要理论技术基础，是计算机科学与技术学科的核心课程。要<br>
+求：<br>
+1.理解数据结构的基本概念；掌握数据的逻辑结构、存储结构及其差异，以及各种基本操作的实现。<br>
+2.掌握基本的数据处理原理和方法的基础上，能够分析算法的时间复杂度与空间复杂度。<br>
+3.能够选择合适的数据结构和算法策略进行问题求解，具备采用 C 或 C++或 JAVA 语言设计<br>
+与实现算法的能力。<br>
+二、内容</p>
+<ol>
+<li>数据结构及算法的相关概念和术语<br>
+（ 1）数据结构及算法的概念；<br>
+（ 2）数据的逻辑结构和存储结构；<br>
+（ 3）算法的定义及特性；<br>
+（ 4）算法时间复杂度和空间复杂度的分析方法。<br>
+2．线性表<br>
+（ 1）线性表的定义<br>
+（ 2）线性表的基本操作及在顺序存储及链式存储上的实现；<br>
+（ 3）各种变形链表（循环链表、双向链表、带头结点的链表等）的表示和基本操作的实现；<br>
+（ 4）递归过程的特点及实现方法；<br>
+（ 5）栈和队列的基本概念；栈和队列的顺序存储结构、链式储存结构及其存储特点；<br>
+（ 6）栈和队<br>
+列的应用<br>
+（ 7）循环队列的判满、判空方法；<br>
+（ 8）特殊矩阵的压缩储存；<br>
+3．广义表的基本概念、存储结构和基本操作<br>
+4．树和二叉树<br>
+（ 1）树与森林的基本概念<br>
+（ 2）树与森林的存储结构及遍历<br>
+（ 3）二叉树的定义及 6 大性质<br>
+（ 4）二叉树的顺序储存与链式储存结构<br>
+（ 5）二叉树的先序、中序、后序三种遍历方式的关系以及实现；层序遍历的实现<br>
+（ 6）线索二叉树的基本概念与构造方法<br>
+（ 7）树与二叉树的应用：二叉排序树；二叉平衡树；哈夫曼树与哈夫曼编码<br>
+5．图<br>
+（ 1）图的基本概念和术语；<br>
+（ 2）图的存储结构：邻接矩阵、邻接表、逆邻接表；<br>
+（ 3）遍历算法：深度优先搜索算法和广度优先搜索算法；<br>
+（ 4）应用：最小生成树；最短路径，拓扑排序和关键路径。<br>
+6．查找<br>
+（ 1）查找的基本概念；静态查找与动态查找；<br>
+（ 2）顺序查找、折半查找、索引查找<br>
+（ 3）哈希查找<br>
+哈希函数的基本构造方法，解决地址冲突的基本策略；<br>
+（ 4）各种查找算法的时间复杂度和空间复杂度。<br>
+7．排序<br>
+（ 1）排序的基本概念<br>
+（ 2）插入排序<br>
+（ 3）简单选择排序<br>
+（ 4）希尔排序<br>
+（ 5）快速排序<br>
+（ 6）堆排序<br>
+（ 7）归并排序<br>
+（ 8）基数排序<br>
+（ 9）排序算法的比较。<br>
+三、题型及分值比例</li>
+<li>填空题（ 10 分）</li>
+<li>单选题（ 20 分）</li>
+<li>简答题（ 30 分）</li>
+<li>算法题（ 15 分）<br>
+其中算法题分为阅读、修改和编写算法三类：<br>
+(1)阅读算法：阅读指定算法，回答使用的数据结构、算法实现的功能或执行的结果；<br>
+(2)修改算法：阅读指定算法，指出算法的错误并修正；指出算法的不足并改进；按给定功能填写<br>
+算法空缺部分；<br>
+(3)编写算法：根据算法功能要求，选择或者设计合适的数据结构，用程序设计语言编写算法，实<br>
+现指定功能。<br>
+以上皆可分析给定或者设计的算法时空复杂度。</li>
+</ol>
+<p>操作系统部分<br>
+一、总体要求<br>
+主要考察学生对操作系统基本概念、原理的理解程度，重点考察操作系统的设计方法与实现技术，<br>
+同时能够具备运用所学的操作系统原理、方法与技术分析问题和解决问题的能力。<br>
+二、内容及比例<br>
+1. 操作系统的基本概念<br>
+1) 批处理与多道程序设计<br>
+2) 分时系统与实时系统<br>
+3) 操作系统的基本类型与特征<br>
+4) 并发与并行的概念<br>
+5) 操作系统的层次结构与功能模块<br>
+6) 程序的并发执行与顺序执行<br>
+2. 进程管理<br>
+1) 进程: 进程控制块、进程的几种基本状态与状态转换（进程的创建、进程的终止、进程的<br>
+阻塞与唤醒、进程的挂起与激活等）<br>
+2) 进程的同步与互斥： 临界资源、临界区、进程同步与互斥问题、信号量机制以及 P、 V 操<br>
+作、管程机制。<br>
+3) 进程间通信：进程通信的类型（直接通信和间接通信方式）、消息传递系统中的几个问题、<br>
+消息缓冲队列通信机制。<br>
+4) 线程与进程的调度:线程与进程的基本概念，调度的类型、调度队列模型、调度方式、进<br>
+程调度算法（先来先服务、短进程优先、时间片轮转、基于优先级的调度算法等）。<br>
+5) 死锁:死锁的基本概念，死锁定理、死锁预防、死锁避免与处理死锁的基本方法、银行家<br>
+算法。<br>
+6) 综合应用：生产者消费者问题、 读者和写者问题、哲学家进餐问题等。<br>
+3. 内存管理<br>
+1) 内存管理的需求：重定位、内存保护、内存共享<br>
+2) 程序的装入和链接：静态装入和可重定位装入、静态链接、动态链接、运行时动态链接。<br>
+3) 分区存储管理：分区方式（ 单一连续分区、 固定分区、 可变式分区）、分区分配算法（首<br>
+次适应算法、循环首次适应算法、最佳适应法、最坏适应法等）。<br>
+4) 段式管理与页式管理：段、页、碎片等基本概念、段式管理与页式管理机制<br>
+5) 虚拟内存：局部性原理、虚拟内存概念、请求分段与请求分页、段页式管理、段页式地址<br>
+结构与地址转换、页面置换算法（ OPT、先进先出、 LRU、 Clock、改进型 Clock 置换）、<br>
+抖动<br>
+4. 设备管理<br>
+1) I/O 系统的：基本概念、 I/O 控制方式（程序 I/0、中断、 DMA、通道）、相关数据结构、<br>
+缓冲管理（单缓冲、双缓冲、循环缓冲、缓冲池）<br>
+2) 磁盘管理与磁盘调度算法： SSTF 算法， SCAN 算法， CSCAN 算法， N-STEP-SCAN 算法， FSCAN<br>
+算法<br>
+3) 设备分配、设备处理、 虚拟设备， Spooling 系统<br>
+5. 文件系统<br>
+1) 基本概念：文件和文件系统、目录、文件结构的物理结构和逻辑结构（顺序文件、索引顺<br>
+序文件、索引文件、 HASH 文件） 、文件共享（基于索引节点、基于符号链接实现文件共享）<br>
+2) 外存分配方法： 连续分配、链接分配、索引分配<br>
+3) 目录管理：单级目录、二级目录、多级目录<br>
+4) 文件存储空间的管理技术： 位示图、空闲链表、索引<br>
+三、题型及分值比例<br>
+1. 填空题（ 10 分）<br>
+2. 单选题（ 10 分）<br>
+3. 简答题（ 20 分）<br>
+4. 应用题（ 35 分</p>
+]]></content>
+      <categories>
+        <category>考研</category>
+      </categories>
+      <tags>
+        <tag>考纲</tag>
+        <tag>电子科技大学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>牧童诗</title>
+    <url>/2020/02/05/%E7%89%A7%E7%AB%A5%E8%AF%97/</url>
+    <content><![CDATA[<p>牧童诗<br>
+——黄庭坚<br>
+骑牛远远过前村，短笛横吹隔陇闻。</p>
+<p>多少长安名利客，机关用尽不如君。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>破解学习（一）</title>
+    <url>/2019/12/15/%E7%A0%B4%E8%A7%A3%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<p>首先检查软件是否加壳，如没有，则相对简单。</p>
+<p>涉及到简单的程序，可以修改相应校验跳转程序，跳过校验。<br>
+如果是程序生成激活码，可以直接在内存中读到对应值，来激活。</p>
+<p>exe程序初始地址：00401000<br>
+<strong>查壳软件：PEid<br>
+破解软件：ollydbg</strong></p>
+<p><img src="/images/2019/12/15/39984dd0-1f32-11ea-9849-dd5291ac14de.png" alt="image.png"></p>
+<p>1.查壳</p>
+<p>2.寻找关键字或断点</p>
+<p>3.找到关键跳转或者关键call</p>
+<p>4.修改达到破解的目的</p>
+<p>ctrl+g     输入00401000来到程序的入口点</p>
+<p>ctrl+f     输入要查找的信息</p>
+]]></content>
+      <categories>
+        <category>破解</category>
+      </categories>
+      <tags>
+        <tag>脱壳</tag>
+        <tag>破解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式</title>
+    <url>/2020/02/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<p><img src="/images/2020/02/16/15cfc250-50a3-11ea-bca7-9dada1bf3f3f.png" alt="image.png"></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>百度语音合成集成到QT问题</title>
+    <url>/2019/05/01/%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90%E9%9B%86%E6%88%90%E5%88%B0QT%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>当我从官方下载了c++的sdk，按照官方说明进行依赖安装，使用时陆续出现了一系列问题，需要注意的是：</p>
+<pre><code>1.编译依赖jsoncpp.openssl.curl依赖需要一致，动态或者静态，debug或者release保持一致，
+建议动态release版本，静态编译库的话后面curl会出现问题很麻烦，不建议静态编译。
+2.在pro配置文件中，规定c++版本。
+3.出现LNK2005或者是MUTIPLE FUNCTION时，直接在对应的头文件中将该函数内联，
+这是由于该框架函数和qt的Q_OBJECT重定义导致的。
+</code></pre>
+<p></p>
+<p><img src="/2019/05/01/%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90%E9%9B%86%E6%88%90%E5%88%B0QT%E9%97%AE%E9%A2%98/%5Cimages%5Cimage-9.png" alt="upload successful"></p>
+]]></content>
+      <categories>
+        <category>语音合成</category>
+      </categories>
+      <tags>
+        <tag>百度语音合成</tag>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>近来所思</title>
+    <url>/2019/11/20/%E8%BF%91%E6%9D%A5%E6%89%80%E6%80%9D/</url>
+    <content><![CDATA[<p>好久没更新博客了，一方面是由于工作经常忙到深夜，精力有限，另一方面自己状态也不是特别好。捱过最难过的日子，总会见曙光的，喜欢做的事情还是要坚持做下去呀，学点新东西，拓宽自己的视野。<br>
+多读几本好书，多看看这个世界，充实自己的灵魂和思想，在最适合自己的年纪做最适合自己的事情，总不会错的~<br>
+解开了心结，挣扎过后，一切都显得那么释然、轻松。从局外人的身份看待别人的事情时，比谁都理智和清晰，但涉及自身，却优柔寡断、唯唯诺诺，思前想后，过自己的生活最重要呀。<br>
+希望未来能好好健身，读书，有空的时候多出去走走，看看自然的风光~<br>
+过好自己的生活就好，念念不忘，岂有回响~</p>
+]]></content>
+      <categories>
+        <category>光阴记录</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>（每日一题）两数之和</title>
+    <url>/2019/11/26/%EF%BC%88%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%EF%BC%89%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
+<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
+<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例：</p>
+<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>
+输出：7 -&gt; 0 -&gt; 8<br>
+原因：342 + 465 = 807</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">    ListNode dummyHead = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    ListNode p = l1, q = l2, curr = dummyHead;</span><br><span class="line">    <span class="keyword">int</span> carry = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (p != <span class="keyword">null</span> || q != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = (p != <span class="keyword">null</span>) ? p.val : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> y = (q != <span class="keyword">null</span>) ? q.val : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sum = carry + x + y;</span><br><span class="line">        carry = sum / <span class="number">10</span>;</span><br><span class="line">        curr.next = <span class="keyword">new</span> ListNode(sum % <span class="number">10</span>);</span><br><span class="line">        curr = curr.next;</span><br><span class="line">        <span class="keyword">if</span> (p != <span class="keyword">null</span>) p = p.next;</span><br><span class="line">        <span class="keyword">if</span> (q != <span class="keyword">null</span>) q = q.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        curr.next = <span class="keyword">new</span> ListNode(carry);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dummyHead.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>每日一题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>（每日一题）算法</title>
+    <url>/2019/11/25/%EF%BC%88%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%EF%BC%89%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>从今天开始，每天刷一道算法题，提升自身逻辑能力，先从简单的来<br>
+给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
+<p>示例:</p>
+<p>给定 nums = [2, 7, 11, 15], target = 9</p>
+<p>因为 nums[0] + nums[1] = 2 + 7 = 9<br>
+所以返回 [0, 1]</p>
+<p>最简答粗暴的解法，时间复杂度高：O(n^2)，空间复杂度低O(1)，一般人最直接的想法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length-<span class="number">1</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;nums.length;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]==target)</span><br><span class="line">                &#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,j&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/11/25/4fb54a10-0f9b-11ea-b0ff-5bdb9aeca405.png" alt="image.png"><br>
+事实上，由于中间变量，暴力法的内存占用也不低<br>
+考虑更多的解法：<br>
+两次哈希，用空间换时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">      Map&lt;Integer,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            map.put(nums[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> <span class="keyword">var</span> = target-nums[i];</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(<span class="keyword">var</span>)&amp;&amp;map.get(<span class="keyword">var</span>)!=i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;i,map.get(<span class="keyword">var</span>)&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/11/25/1ae9f830-0f9b-11ea-b0ff-5bdb9aeca405.png" alt="image.png"><br>
+事实证明，可以在生成hash的同时，检查是否存在相关值，减少迭代次数</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">      Map&lt;Integer,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> <span class="keyword">var</span> = target - nums[i];</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(<span class="keyword">var</span>)&amp;&amp;map.get(<span class="keyword">var</span>)!=i)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,map.get(<span class="keyword">var</span>)&#125;;</span><br><span class="line">            map.put(nums[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019/11/26/a4c8f690-0f9c-11ea-b0ff-5bdb9aeca405.png" alt="image.png"><br>
+此方法是利用了问题计算的对称性，来减少计算量。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>每日一题</tag>
+      </tags>
+  </entry>
+</search>
