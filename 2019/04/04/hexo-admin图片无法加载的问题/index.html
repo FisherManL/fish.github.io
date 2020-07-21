@@ -116,15 +116,15 @@
 <meta property="og:site_name" content="希望生活越来越好">
 <meta property="og:description" content="hexo-admin提供实时预览功能，但是在粘贴图片到markdown编辑器时，一直显示不了图片 会出现   无论怎么刷新都无法显示，是因为粘贴的路径有问题：\\image\\图片.png\，这里我们发现图片后面还有斜杠，image前面有两个斜杠，所以，直接去代码修改相关处。  在hexo-admin\www\bundle.js里面，搜索imageUploads，到第二处，添加代码：  var t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.hjliao.cn/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-4.png">
-<meta property="og:image" content="http://www.hjliao.cn/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-5.png">
-<meta property="og:image" content="http://www.hjliao.cn/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-3.png">
-<meta property="og:image" content="http://www.hjliao.cn/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-6.png">
+<meta property="og:image" content="http://www.hjliao.cn/images/image-4.png">
+<meta property="og:image" content="http://www.hjliao.cn/images/image-5.png">
+<meta property="og:image" content="http://www.hjliao.cn/images/image-3.png">
+<meta property="og:image" content="http://www.hjliao.cn/images/image-6.png">
 <meta property="og:updated_time" content="2019-04-04T09:46:52.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="修复hexo-admin图片无法加载的问题">
 <meta name="twitter:description" content="hexo-admin提供实时预览功能，但是在粘贴图片到markdown编辑器时，一直显示不了图片 会出现   无论怎么刷新都无法显示，是因为粘贴的路径有问题：\\image\\图片.png\，这里我们发现图片后面还有斜杠，image前面有两个斜杠，所以，直接去代码修改相关处。  在hexo-admin\www\bundle.js里面，搜索imageUploads，到第二处，添加代码：  var t">
-<meta name="twitter:image" content="http://www.hjliao.cn/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-4.png">
+<meta name="twitter:image" content="http://www.hjliao.cn/images/image-4.png">
 
 
 
@@ -465,16 +465,16 @@
         <pre><code>hexo-admin提供实时预览功能，但是在粘贴图片到markdown编辑器时，一直显示不了图片
 会出现
 </code></pre>
-<p><img src="/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-4.png" alt="upload successful"></p>
+<p><img src="/images/image-4.png" alt="upload successful"></p>
 <pre><code>无论怎么刷新都无法显示，是因为粘贴的路径有问题：\\image\\图片.png\，这里我们发现图片后面还有斜杠，image前面有两个斜杠，所以，直接去代码修改相关处。
 </code></pre>
 <p>在hexo-admin\www\bundle.js里面，搜索imageUploads，到第二处，添加代码：  var temp = res.src.split(’\’); res.src = ‘\’ + temp[2] + ‘\’+ temp[3];即可，截图如下：<br>
    <br>
-<img src="/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-5.png" alt="upload successful"></p>
+<img src="/images/image-5.png" alt="upload successful"></p>
 <pre><code> 然后就可以实时显示图片了，还有问题的话点一下右上角的检查按钮就行了，返回预览就能看到效果。
 </code></pre>
-<p><img src="/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-3.png" alt="upload successful"></p>
-<p><img src="/2019/04/04/hexo-admin图片无法加载的问题/%5Cimages%5Cimage-6.png" alt="upload successful"></p>
+<p><img src="/images/image-3.png" alt="upload successful"></p>
+<p><img src="/images/image-6.png" alt="upload successful"></p>
 
       
     </div>
