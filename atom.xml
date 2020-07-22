@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hjliao.cn/"/>
-  <updated>2020-07-22T13:55:40.117Z</updated>
+  <updated>2020-07-22T14:07:28.757Z</updated>
   <id>http://www.hjliao.cn/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java设计模式：单例模式（静态内部类）</title>
+    <link href="http://www.hjliao.cn/2020/07/22/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%89/"/>
+    <id>http://www.hjliao.cn/2020/07/22/Java设计模式：单例模式（静态内部类）/</id>
+    <published>2020-07-22T14:02:58.000Z</published>
+    <updated>2020-07-22T14:07:28.757Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>本方法采用静态内部类实现，使用JVM装载机制保证初始化时只有一个实例变量，这种方法在装载时不会立即实例化，而是在需要的时候实例化.JVM保证了在类装载的时候，别的线程无法进入<br>优点：线程安全，延迟加载，效率高<br>推荐使用</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleInstance</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            Singleton instance2 = Singleton.getInstance();</span><br><span class="line">            System.out.println(instance2.hashCode());</span><br><span class="line">        &#125;).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line"></span><br><span class="line">            Singleton instance1 = Singleton.getInstance();</span><br><span class="line">            System.out.println(instance1.hashCode());</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">//构造器私有化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态内部类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonInstance</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton Instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonInstance.Instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;本方法采用静态内部类实现，使用JVM装载机制保证初始化时只有一个实例变量，这种方法在装载时不会立即实例化，而是在需要的时候实例化.JVM保证了在类装载的时候，别的线程无法进入&lt;br&gt;
+优点：线程安全，延迟加载，效率高&lt;br&gt;
+推荐使用&lt;/strong&gt;&lt;/p
+      
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://www.hjliao.cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Java" scheme="http://www.hjliao.cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Java/"/>
+    
+    
+      <category term="设计模式" scheme="http://www.hjliao.cn/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>Java设计模式：单例模式（懒汉模式）</title>
@@ -552,36 +581,6 @@ tmp32dll\sha1-586.asm(1576) : err
       <category term="乱码" scheme="http://www.hjliao.cn/tags/%E4%B9%B1%E7%A0%81/"/>
     
       <category term="qt" scheme="http://www.hjliao.cn/tags/qt/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>修复hexo-admin图片无法加载的问题</title>
-    <link href="http://www.hjliao.cn/2019/04/04/hexo-admin%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://www.hjliao.cn/2019/04/04/hexo-admin图片无法加载的问题/</id>
-    <published>2019-04-04T09:35:00.000Z</published>
-    <updated>2019-04-04T09:46:52.707Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>hexo-admin提供实时预览功能，但是在粘贴图片到markdown编辑器时，一直显示不了图片会出现</code></pre><p><img src="/images/image-4.png" alt="upload successful"></p><pre><code>无论怎么刷新都无法显示，是因为粘贴的路径有问题：\\image\\图片.png\，这里我们发现图片后面还有斜杠，image前面有两个斜杠，所以，直接去代码修改相关处。</code></pre><p>在hexo-admin\www\bundle.js里面，搜索imageUploads，到第二处，添加代码：  var temp = res.src.split(’\’); res.src = ‘\’ + temp[2] + ‘\’+ temp[3];即可，截图如下：<br>   <br><img src="/images/image-5.png" alt="upload successful"></p><pre><code> 然后就可以实时显示图片了，还有问题的话点一下右上角的检查按钮就行了，返回预览就能看到效果。</code></pre><p><img src="/images/image-3.png" alt="upload successful"></p><p><img src="/images/image-6.png" alt="upload successful"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;pre&gt;&lt;code&gt;hexo-admin提供实时预览功能，但是在粘贴图片到markdown编辑器时，一直显示不了图片
-会出现
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&quot;/images/image-4.png&quot; alt=&quot;upload successful&quot;&gt;&lt;/p&gt;
-      
-    
-    </summary>
-    
-      <category term="hexo-admin" scheme="http://www.hjliao.cn/categories/hexo-admin/"/>
-    
-    
-      <category term="hexo-admin" scheme="http://www.hjliao.cn/tags/hexo-admin/"/>
-    
-      <category term="修复" scheme="http://www.hjliao.cn/tags/%E4%BF%AE%E5%A4%8D/"/>
     
   </entry>
   
