@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="JDK1.5后实现单例模式 优点：避免多线程同步问题，防止反序列化重新创建新的对象 推荐使用 123456789101112131415161718192021222324public class SingleInstance &amp;#123;    public static void main(String []args)    &amp;#123;        new Thread(()-&amp;gt;&amp;#">
+  <meta name="description" content="JDK1.5后用enum枚举类型实现单例模式 优点：避免多线程同步问题，防止反序列化重新创建新的对象 推荐使用 123456789101112131415161718192021222324public class SingleInstance &amp;#123;    public static void main(String []args)    &amp;#123;        new Thread(">
 <meta name="keywords" content="hjliao">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java设计模式：单例模式（枚举）">
 <meta property="og:url" content="http://www.hjliao.cn/2020/07/22/Java设计模式：单例模式（枚举）/index.html">
 <meta property="og:site_name" content="希望生活越来越好">
-<meta property="og:description" content="JDK1.5后实现单例模式 优点：避免多线程同步问题，防止反序列化重新创建新的对象 推荐使用 123456789101112131415161718192021222324public class SingleInstance &amp;#123;    public static void main(String []args)    &amp;#123;        new Thread(()-&amp;gt;&amp;#">
+<meta property="og:description" content="JDK1.5后用enum枚举类型实现单例模式 优点：避免多线程同步问题，防止反序列化重新创建新的对象 推荐使用 123456789101112131415161718192021222324public class SingleInstance &amp;#123;    public static void main(String []args)    &amp;#123;        new Thread(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-22T14:15:52.937Z">
+<meta property="og:updated_time" content="2020-07-22T14:18:16.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java设计模式：单例模式（枚举）">
-<meta name="twitter:description" content="JDK1.5后实现单例模式 优点：避免多线程同步问题，防止反序列化重新创建新的对象 推荐使用 123456789101112131415161718192021222324public class SingleInstance &amp;#123;    public static void main(String []args)    &amp;#123;        new Thread(()-&amp;gt;&amp;#">
+<meta name="twitter:description" content="JDK1.5后用enum枚举类型实现单例模式 优点：避免多线程同步问题，防止反序列化重新创建新的对象 推荐使用 123456789101112131415161718192021222324public class SingleInstance &amp;#123;    public static void main(String []args)    &amp;#123;        new Thread(">
 
 
 
@@ -396,9 +396,13 @@
                 
               
 
-              <time title="创建时间：2020-07-22 22:15:52" itemprop="dateCreated datePublished" datetime="2020-07-22T22:15:52+08:00">2020-07-22</time>
+              <time title="创建时间：2020-07-22 22:15:52 / 修改时间：22:18:16" itemprop="dateCreated datePublished" datetime="2020-07-22T22:15:52+08:00">2020-07-22</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -435,11 +439,10 @@
       
 
       
-        <p>JDK1.5后实现单例模式<br>
+        <p>JDK1.5后用enum枚举类型实现单例模式<br>
 优点：避免多线程同步问题，防止反序列化重新创建新的对象<br>
 推荐使用</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleInstance</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            Singleton instance2 = Singleton.Instance;</span><br><span class="line">            System.out.println(instance2.hashCode());</span><br><span class="line">            instance2.SayHello();</span><br><span class="line">        &#125;).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line"></span><br><span class="line">            Singleton instance1 = Singleton.Instance;</span><br><span class="line">            System.out.println(instance1.hashCode());</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">enum</span> Singleton&#123;</span><br><span class="line">    Instance;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
       
     </div>
 
