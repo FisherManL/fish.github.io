@@ -354,6 +354,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.hjliao.cn/2019/04/08/enssl安装问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hjliao">
+      <meta itemprop="description" content="个人小站，思考和记录的天空">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="希望生活越来越好">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/08/enssl安装问题/" itemprop="url">
+                  openssl安装问题
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-08 22:48:00" itemprop="dateCreated datePublished" datetime="2019-04-08T22:48:00+08:00">2019-04-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-09 16:43:48" itemprop="dateModified" datetime="2019-04-09T16:43:48+08:00">2019-04-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/openssl/" itemprop="url" rel="index"><span itemprop="name">openssl</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>编译openssl过程中出现错误：</p>
+<pre><code>tmp32dll\sha1-586.asm(1432) : error A2070:invalid instruction operands
+tmp32dll\sha1-586.asm(1576) : error A2070:invalid instruction operands
+</code></pre>
+<p>由于1.0.2版本过新，导致报错，于是下载1.0.1版本，链接如下：</p>
+<pre><code>    https://www.openssl.org/source/openssl-1.0.1r.tar.gz
+</code></pre>
+<p>32位安装流程：</p>
+<pre><code>   1.安装perl
+   2.配置vs开发人工具环境变量
+   3.打开命令窗口到openssl文件夹下
+   4.perl configure VC-WIN32
+   5.ms/do_ms
+   6.nmake -f ms\ntdll.mak 
+   测试成功：
+   7.nmake -f ms\ntdll.mak test
+</code></pre>
+<p>64位安装流程：</p>
+<pre><code>     1.安装perl
+     2.配置vs开发人工具环境变量
+     3.打开命令窗口到openssl文件夹下
+  
+     4.perl Configure debug-VC-WIN64A no-asm --prefix=C:\openssl\lib --	openssldir=C:\openssl\bin 		
+     5.ms\do_win64a
+     6.nmake -f ms\ntdll.mak clean
+     7.nmake -f ms\ntdll.mak 
+     8.nmake -f ms\nt.mak clean
+     9.nmake -f ms\nt.mak</code></pre>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.hjliao.cn/2019/04/05/TTS软件帮助说明/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1025,167 +1224,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.hjliao.cn/2019/04/04/Test-hexo-admin/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hjliao">
-      <meta itemprop="description" content="个人小站，思考和记录的天空">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="希望生活越来越好">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/04/Test-hexo-admin/" itemprop="url">
-                  Test hexo admin
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-04 14:43:00 / 修改时间：17:35:09" itemprop="dateCreated datePublished" datetime="2019-04-04T14:43:00+08:00">2019-04-04</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/测试/" itemprop="url" rel="index"><span itemprop="name">测试</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>测试一下hexo admin的图片的上传</p>
-<p><img src="/images/pasted-2.png" alt="upload successful"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1233,7 +1271,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1284,7 +1322,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1359,7 +1401,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">31</span>
+                      
+                    
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
