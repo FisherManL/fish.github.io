@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hjliao.cn/"/>
-  <updated>2020-07-22T14:07:28.757Z</updated>
+  <updated>2020-07-22T14:15:52.937Z</updated>
   <id>http://www.hjliao.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java设计模式：单例模式（枚举）</title>
+    <link href="http://www.hjliao.cn/2020/07/22/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E6%9E%9A%E4%B8%BE%EF%BC%89/"/>
+    <id>http://www.hjliao.cn/2020/07/22/Java设计模式：单例模式（枚举）/</id>
+    <published>2020-07-22T14:15:52.000Z</published>
+    <updated>2020-07-22T14:15:52.937Z</updated>
+    
+    <content type="html"><![CDATA[<p>JDK1.5后实现单例模式<br>优点：避免多线程同步问题，防止反序列化重新创建新的对象<br>推荐使用</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleInstance</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            Singleton instance2 = Singleton.Instance;</span><br><span class="line">            System.out.println(instance2.hashCode());</span><br><span class="line">            instance2.SayHello();</span><br><span class="line">        &#125;).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line"></span><br><span class="line">            Singleton instance1 = Singleton.Instance;</span><br><span class="line">            System.out.println(instance1.hashCode());</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">enum</span> Singleton&#123;</span><br><span class="line">    Instance;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;JDK1.5后实现单例模式&lt;br&gt;
+优点：避免多线程同步问题，防止反序列化重新创建新的对象&lt;br&gt;
+推荐使用&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Java设计模式：单例模式（静态内部类）</title>
@@ -553,34 +577,6 @@ tmp32dll\sha1-586.asm(1576) : err
       <category term="毕设" scheme="http://www.hjliao.cn/tags/%E6%AF%95%E8%AE%BE/"/>
     
       <category term="TTS" scheme="http://www.hjliao.cn/tags/TTS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>QT5设置文件保存格式为UTF-8</title>
-    <link href="http://www.hjliao.cn/2019/04/04/T5%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98%E6%A0%BC%E5%BC%8F%E4%B8%BAUTF-8/"/>
-    <id>http://www.hjliao.cn/2019/04/04/T5设置文件保存格式为UTF-8/</id>
-    <published>2019-04-04T14:31:00.000Z</published>
-    <updated>2019-04-04T14:38:00.655Z</updated>
-    
-    <content type="html"><![CDATA[<p>设置文件流的格式为UTF-8即可，解决读出文件中文显示乱码问题</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QTextStream <span class="title">ts</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line">ts.setCodec(<span class="string">"UTF-8"</span>);</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;设置文件流的格式为UTF-8即可，解决读出文件中文显示乱码问题&lt;/p&gt;
-&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span c
-      
-    
-    </summary>
-    
-      <category term="qt" scheme="http://www.hjliao.cn/categories/qt/"/>
-    
-    
-      <category term="乱码" scheme="http://www.hjliao.cn/tags/%E4%B9%B1%E7%A0%81/"/>
-    
-      <category term="qt" scheme="http://www.hjliao.cn/tags/qt/"/>
     
   </entry>
   
