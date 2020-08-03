@@ -826,4 +826,18 @@ O( r ),与序列的初始状态无关。<br>
         <tag>设计模式</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Java设计模式：简单工厂模式</title>
+    <url>/2020/07/23/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<p><strong>简单工厂模式：</strong><br>
+<strong>定义一个类，由这个类来封装实例化对象的行为（代码）</strong></p>
+]]></content>
+      <categories>
+        <category>设计模式</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
 </search>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hjliao.cn/"/>
-  <updated>2020-07-22T14:54:40.856Z</updated>
+  <updated>2020-07-23T15:16:25.646Z</updated>
   <id>http://www.hjliao.cn/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java设计模式：简单工厂模式</title>
+    <link href="http://www.hjliao.cn/2020/07/23/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://www.hjliao.cn/2020/07/23/Java设计模式：简单工厂模式/</id>
+    <published>2020-07-23T15:16:25.000Z</published>
+    <updated>2020-07-23T15:16:25.646Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>简单工厂模式：</strong><br><strong>定义一个类，由这个类来封装实例化对象的行为（代码）</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;简单工厂模式：&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;定义一个类，由这个类来封装实例化对象的行为（代码）&lt;/strong&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://www.hjliao.cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Java" scheme="http://www.hjliao.cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Java/"/>
+    
+    
+      <category term="设计模式" scheme="http://www.hjliao.cn/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>Java设计模式：单例模式（双重检查）</title>
@@ -548,35 +577,6 @@ connect(this-&amp;gt;m,SIGNAL(baseonButtonGlobalClickedSignal()),this,SLOT(onBut
       <category term="qt5" scheme="http://www.hjliao.cn/tags/qt5/"/>
     
       <category term="信号和槽" scheme="http://www.hjliao.cn/tags/%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>openssl安装问题</title>
-    <link href="http://www.hjliao.cn/2019/04/08/enssl%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/"/>
-    <id>http://www.hjliao.cn/2019/04/08/enssl安装问题/</id>
-    <published>2019-04-08T14:48:00.000Z</published>
-    <updated>2019-04-09T08:43:48.233Z</updated>
-    
-    <content type="html"><![CDATA[<p>编译openssl过程中出现错误：</p><pre><code>tmp32dll\sha1-586.asm(1432) : error A2070:invalid instruction operandstmp32dll\sha1-586.asm(1576) : error A2070:invalid instruction operands</code></pre><p>由于1.0.2版本过新，导致报错，于是下载1.0.1版本，链接如下：</p><pre><code>    https://www.openssl.org/source/openssl-1.0.1r.tar.gz</code></pre><p>32位安装流程：</p><pre><code>   1.安装perl   2.配置vs开发人工具环境变量   3.打开命令窗口到openssl文件夹下   4.perl configure VC-WIN32   5.ms/do_ms   6.nmake -f ms\ntdll.mak    测试成功：   7.nmake -f ms\ntdll.mak test</code></pre><p>64位安装流程：</p><pre><code>     1.安装perl     2.配置vs开发人工具环境变量     3.打开命令窗口到openssl文件夹下       4.perl Configure debug-VC-WIN64A no-asm --prefix=C:\openssl\lib --openssldir=C:\openssl\bin      5.ms\do_win64a     6.nmake -f ms\ntdll.mak clean     7.nmake -f ms\ntdll.mak      8.nmake -f ms\nt.mak clean     9.nmake -f ms\nt.mak</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;编译openssl过程中出现错误：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;tmp32dll\sha1-586.asm(1432) : error A2070:invalid instruction operands
-tmp32dll\sha1-586.asm(1576) : err
-      
-    
-    </summary>
-    
-      <category term="openssl" scheme="http://www.hjliao.cn/categories/openssl/"/>
-    
-    
-      <category term="openssl" scheme="http://www.hjliao.cn/tags/openssl/"/>
-    
-      <category term="vs2017" scheme="http://www.hjliao.cn/tags/vs2017/"/>
     
   </entry>
   
