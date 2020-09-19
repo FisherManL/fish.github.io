@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hjliao.cn/"/>
-  <updated>2020-07-23T15:16:25.646Z</updated>
+  <updated>2020-09-19T04:20:28.707Z</updated>
   <id>http://www.hjliao.cn/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【队列】队列结构</title>
+    <link href="http://www.hjliao.cn/2020/09/19/%E3%80%90%E9%98%9F%E5%88%97%E3%80%91%E9%98%9F%E5%88%97%E7%BB%93%E6%9E%84/"/>
+    <id>http://www.hjliao.cn/2020/09/19/【队列】队列结构/</id>
+    <published>2020-09-19T04:20:28.000Z</published>
+    <updated>2020-09-19T04:20:28.707Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by hj-liao on 2020/9/19.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//Circle Queue</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"iostream"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stack"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 10</span></span><br><span class="line"><span class="keyword">typedef</span>  <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> data[MAXSIZE];</span><br><span class="line">    <span class="keyword">int</span> front=<span class="number">0</span>,rear=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> tag=<span class="number">0</span>;</span><br><span class="line">&#125;SqQueue;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isEmpty</span><span class="params">(SqQueue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Q.rear==Q.front &amp;&amp; Q.tag==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isFull</span><span class="params">(SqQueue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Q.rear==Q.front &amp;&amp; Q.tag==<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">EnQueue</span><span class="params">(SqQueue &amp;Q,<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(isFull(Q))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"队列已满，无法入队！"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Q.data[Q.rear] = x;</span><br><span class="line">    Q.rear = (Q.rear+<span class="number">1</span>)%MAXSIZE;</span><br><span class="line">    <span class="keyword">if</span>(Q.front==Q.rear)</span><br><span class="line">        Q.tag = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DeQueue</span><span class="params">(SqQueue &amp;Q,<span class="keyword">int</span> &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(isEmpty(Q))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"队列已空"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    x = Q.data[Q.front];</span><br><span class="line">    Q.front = (Q.front+<span class="number">1</span>)%MAXSIZE;</span><br><span class="line">    <span class="keyword">if</span>(Q.tag==<span class="number">1</span>)</span><br><span class="line">        Q.tag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QueueLength</span><span class="params">(SqQueue Q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Q.tag==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> (Q.rear - Q.front + MAXSIZE) % MAXSIZE;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> MAXSIZE;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(SqQueue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(isEmpty(Q))</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"队列已空"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> i,length;</span><br><span class="line">        length = QueueLength(Q);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"循环队列元素："</span>&lt;&lt;length&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; Q.data[(Q.front + i) % MAXSIZE] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverseQueue</span><span class="params">(SqQueue &amp;Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"逆置队列..."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">stack</span>;</span><br><span class="line">    <span class="keyword">int</span> i,length;</span><br><span class="line">    length = QueueLength(Q);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">stack</span>.push((Q.front+i)%MAXSIZE);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Q.data[(Q.front+i)%MAXSIZE] = <span class="built_in">stack</span>.top();</span><br><span class="line">        <span class="built_in">stack</span>.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SqQueue Q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">13</span>;i++)</span><br><span class="line">        EnQueue(Q,i);</span><br><span class="line">    print(Q);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        DeQueue(Q,x);</span><br><span class="line">    &#125;</span><br><span class="line">    print(Q);</span><br><span class="line">    reverseQueue(Q);</span><br><span class="line">    print(Q);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>运行：</strong><br><img src="/images/2020/09/19/29debec2-d1be-4824-ac79-d80ef64e365c.png" alt="image.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;
+      
+    
+    </summary>
+    
+      <category term="数据结构" scheme="http://www.hjliao.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="算法" scheme="http://www.hjliao.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="http://www.hjliao.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数据结构" scheme="http://www.hjliao.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="队列" scheme="http://www.hjliao.cn/tags/%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Java设计模式：简单工厂模式</title>
@@ -546,37 +577,6 @@
     
     
       <category term="openssl" scheme="http://www.hjliao.cn/tags/openssl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>QT5信号槽连接方式</title>
-    <link href="http://www.hjliao.cn/2019/04/13/QT5%E4%BF%A1%E5%8F%B7%E6%A7%BD%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F/"/>
-    <id>http://www.hjliao.cn/2019/04/13/QT5信号槽连接方式/</id>
-    <published>2019-04-13T05:33:00.000Z</published>
-    <updated>2019-04-13T05:38:18.172Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>旧的写法：connect(this-&gt;m,SIGNAL(baseonButtonGlobalClickedSignal()),this,SLOT(onButtonGlobalClicked()));</code></pre><p></p><pre><code>新的写法:connect(this-&gt;helpcontent,&amp;QLabelClicked::QLabelClickedSignal,this,&amp;MainWindow::onOpenUrl);注意：不能混用，SIGNAL和SLOT搭配，信号和槽要适配，不能信号用旧的写法， 槽用新的写法。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;pre&gt;&lt;code&gt;旧的写法：
-connect(this-&amp;gt;m,SIGNAL(baseonButtonGlobalClickedSignal()),this,SLOT(onButtonGlobalClicked()));
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;pr
-      
-    
-    </summary>
-    
-      <category term="qt5" scheme="http://www.hjliao.cn/categories/qt5/"/>
-    
-    
-      <category term="qt5" scheme="http://www.hjliao.cn/tags/qt5/"/>
-    
-      <category term="信号和槽" scheme="http://www.hjliao.cn/tags/%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"/>
     
   </entry>
   
