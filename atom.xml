@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.hjliao.cn/"/>
-  <updated>2020-09-19T04:20:28.707Z</updated>
+  <updated>2020-11-16T10:17:57.247Z</updated>
   <id>http://www.hjliao.cn/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【算法】最长回文子串</title>
+    <link href="http://www.hjliao.cn/2020/11/16/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/"/>
+    <id>http://www.hjliao.cn/2020/11/16/【算法】最长回文子串/</id>
+    <published>2020-11-16T10:17:57.000Z</published>
+    <updated>2020-11-16T10:17:57.247Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong><strong># 最长回文子串</strong></strong><br>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。</p><p>示例 1：</p><p>输入: “babad”<br>输出: “bab”<br>注意: “aba” 也是一个有效答案。<br>示例 2：</p><p>输入: “cbbd”<br>输出: “bb”</p><p>方法一，穷举：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String ans = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+max;j&lt;s.length();j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(isPalindrome(s,i,j)&amp;&amp;max&lt;j-i+<span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line"></span><br><span class="line">                    ans = s.substring(i,j+<span class="number">1</span>);</span><br><span class="line">                    max = j-i+<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断是否是回文串</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(String s,<span class="keyword">int</span> start,<span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start&gt;end || s.isEmpty()||s.length()&lt;=end)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">while</span> (start&lt;=end)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(start++)!=s.charAt(end--))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>结果：<br><img src="/images/2020/11/16/3532461d-afe5-417a-8065-6de86526eac7.png" alt="image.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;&lt;strong&gt;# 最长回文子串&lt;/strong&gt;&lt;/strong&gt;&lt;br&gt;
+给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。&lt;/p&gt;
+&lt;p&gt;示例 1：&lt;/p&gt;
+&lt;p&gt;输入: “babad”&lt;br&gt;
+输出: “bab”
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="http://www.hjliao.cn/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="http://www.hjliao.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="每日一题" scheme="http://www.hjliao.cn/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>【队列】队列结构</title>
@@ -551,32 +582,6 @@
       <category term="百度语音合成" scheme="http://www.hjliao.cn/tags/%E7%99%BE%E5%BA%A6%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90/"/>
     
       <category term="QT" scheme="http://www.hjliao.cn/tags/QT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Openssl-windows编译说明</title>
-    <link href="http://www.hjliao.cn/2019/04/30/Openssl%E5%AE%98%E6%96%B9%E7%BC%96%E8%AF%91%E8%AF%B4%E6%98%8E/"/>
-    <id>http://www.hjliao.cn/2019/04/30/Openssl官方编译说明/</id>
-    <published>2019-04-30T04:17:00.000Z</published>
-    <updated>2019-04-30T05:52:43.886Z</updated>
-    
-    <content type="html"><![CDATA[<p>on Windows (only pick one of the targets for configuration):</p><pre><code>  $ perl Configure { VC-WIN32 | VC-WIN64A | VC-WIN64I | VC-CE }  $ nmake  $ nmake test  $ nmake install</code></pre><p>在新的vc编译环境下，ms不提供支持了，所以用nmake工具，perl后添加no-shared为编译静态库，默认编译动态库</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;on Windows (only pick one of the targets for configuration):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  $ perl Configure { VC-WIN32 | VC-WIN64A | VC-WIN64I | VC-CE
-      
-    
-    </summary>
-    
-      <category term="openssl" scheme="http://www.hjliao.cn/categories/openssl/"/>
-    
-    
-      <category term="openssl" scheme="http://www.hjliao.cn/tags/openssl/"/>
     
   </entry>
   

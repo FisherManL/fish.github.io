@@ -354,6 +354,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.hjliao.cn/2019/04/30/Openssl官方编译说明/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hjliao">
+      <meta itemprop="description" content="个人小站，思考和记录的天空">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="希望生活越来越好">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/30/Openssl官方编译说明/" itemprop="url">
+                  Openssl-windows编译说明
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-30 12:17:00 / 修改时间：13:52:43" itemprop="dateCreated datePublished" datetime="2019-04-30T12:17:00+08:00">2019-04-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/openssl/" itemprop="url" rel="index"><span itemprop="name">openssl</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>on Windows (only pick one of the targets for configuration):</p>
+<pre><code>  $ perl Configure { VC-WIN32 | VC-WIN64A | VC-WIN64I | VC-CE }
+  $ nmake
+  $ nmake test
+  $ nmake install
+</code></pre>
+<p>在新的vc编译环境下，ms不提供支持了，所以用nmake工具，perl后添加no-shared为编译静态库，默认编译动态库</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.hjliao.cn/2019/04/13/QT5信号槽连接方式/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1057,178 +1223,6 @@ tmp32dll\sha1-586.asm(1576) : error A2070:invalid instruction operands
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.hjliao.cn/2019/04/04/hexo-admin图片无法加载的问题/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hjliao">
-      <meta itemprop="description" content="个人小站，思考和记录的天空">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="希望生活越来越好">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/04/hexo-admin图片无法加载的问题/" itemprop="url">
-                  修复hexo-admin图片无法加载的问题
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-04 17:35:00 / 修改时间：17:46:52" itemprop="dateCreated datePublished" datetime="2019-04-04T17:35:00+08:00">2019-04-04</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/hexo-admin/" itemprop="url" rel="index"><span itemprop="name">hexo-admin</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>hexo-admin提供实时预览功能，但是在粘贴图片到markdown编辑器时，一直显示不了图片
-会出现
-</code></pre>
-<p><img src="/images/image-4.png" alt="upload successful"></p>
-<pre><code>无论怎么刷新都无法显示，是因为粘贴的路径有问题：\\image\\图片.png\，这里我们发现图片后面还有斜杠，image前面有两个斜杠，所以，直接去代码修改相关处。
-</code></pre>
-<p>在hexo-admin\www\bundle.js里面，搜索imageUploads，到第二处，添加代码：  var temp = res.src.split(’\’); res.src = ‘\’ + temp[2] + ‘\’+ temp[3];即可，截图如下：<br>
-   <br>
-<img src="/images/image-5.png" alt="upload successful"></p>
-<pre><code> 然后就可以实时显示图片了，还有问题的话点一下右上角的检查按钮就行了，返回预览就能看到效果。
-</code></pre>
-<p><img src="/images/image-3.png" alt="upload successful"></p>
-<p><img src="/images/image-6.png" alt="upload successful"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1276,7 +1270,7 @@ tmp32dll\sha1-586.asm(1576) : error A2070:invalid instruction operands
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
